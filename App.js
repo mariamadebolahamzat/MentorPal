@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Landing from './screens/Landing';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
+import Dashboard from './screens/Dashboard';
 
 import {auth} from './config/firebase';
 
@@ -55,6 +55,7 @@ const App = () => {
         name="Signup" 
         component={Signup}
          /> 
+         <Stack.Screen options={{headerShown: false}} name="Dashboard" component={Dashboard}/>
         
         </Stack.Navigator>
     </NavigationContainer>
