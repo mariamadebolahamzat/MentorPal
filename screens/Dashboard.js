@@ -5,7 +5,7 @@ import {Ionicons} from '@expo/vector-icons';
 import Home from './Home';
 import myNetwork from './myNetwork';
 import Notifications from './Notifications';
-import Profile from './Profile';
+import Messages from './Messages'
 
 const Tab = createBottomTabNavigator();
 
@@ -29,10 +29,10 @@ const Dashboard = () => {
                         iconName = focused
                         ? 'ios-notifications'
                         : 'ios-notifications'
-                     } else if (route.name === 'Profile') {
-                         iconName = focused
-                         ? 'ios-person'
-                         : 'ios-person'
+                     } else if (route.name === 'Messages') {
+                        iconName = focused
+                        ? 'ios-mail'
+                        : 'ios-mail'
                      }
                      return <Ionicons name={iconName} size={size} color={color} />
                     }
@@ -49,7 +49,7 @@ const Dashboard = () => {
             <Tab.Screen name="Home" component={Home}/>
             <Tab.Screen name="My Network" component={myNetwork}/>
             <Tab.Screen name="Notifications" component={Notifications}/>
-            <Tab.Screen name="Profile" component={Profile}/>
+            <Tab.Screen name="Messages" component={Messages}/>
         </Tab.Navigator>
     )
 };

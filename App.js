@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Image, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -10,6 +11,15 @@ import Dashboard from './screens/Dashboard';
 import {auth} from './config/firebase';
 
 const Stack = createStackNavigator();
+
+const Logo = () => {
+  return (
+    <Image
+      style={{ width: 50, height: 50, borderRadius: 100 }}
+      source={require('../assets/logo.png')}
+    />
+  );
+}
 
 const App = () => {
   const [fullname, setFullname] = useState('');
@@ -55,7 +65,11 @@ const App = () => {
         name="Signup" 
         component={Signup}
          /> 
-         <Stack.Screen options={{headerShown: false}} name="Dashboard" component={Dashboard}/>
+         <Stack.Screen options={{headerShown: false,
+         headerTitle: props => <Logo {...props}/>
+        }} 
+         name="Dashboard" component={Dashboard} 
+         />
         
         </Stack.Navigator>
     </NavigationContainer>
