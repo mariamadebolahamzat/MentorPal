@@ -7,6 +7,7 @@ import Landing from './screens/Landing';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
 import Dashboard from './screens/Dashboard';
+import Menu from './screens/Menu';
 
 import {auth} from './config/firebase';
 
@@ -15,8 +16,8 @@ const Stack = createStackNavigator();
 const Logo = () => {
   return (
     <Image
-      style={{ width: 50, height: 50, borderRadius: 100 }}
-      source={require('../assets/logo.png')}
+      style={{ width: 100, height: 50, borderRadius: 100 }}
+      source={require('./assets/logo.png')}
     />
   );
 }
@@ -26,7 +27,6 @@ const App = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log(user.displayName, '????')
       if (user) {
         setFullname(user.displayName);
       } else {
@@ -65,13 +65,13 @@ const App = () => {
         name="Signup" 
         component={Signup}
          /> 
-         <Stack.Screen options={{headerShown: false,
+         <Stack.Screen options={{headerShown: true,
          headerTitle: props => <Logo {...props}/>
         }} 
          name="Dashboard" component={Dashboard} 
          />
-        
         </Stack.Navigator>
+        <Menu/>
     </NavigationContainer>
     </>
   )

@@ -1,15 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import Menu from './Menu';
 
 
-const Home = () => {
+const ContactUs = () => {
     return (
-        <View>
-             <Menu/> 
         <View style={styles.container}>
-            <Text>This is the Home Page</Text>
-        </View>
+            <Text>You can contact us through the following channels</Text>
         </View>
     )
 };
@@ -22,4 +18,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Home;
+export default ContactUs;

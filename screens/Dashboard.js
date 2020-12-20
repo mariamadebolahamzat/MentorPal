@@ -7,11 +7,15 @@ import myNetwork from './myNetwork';
 import Notifications from './Notifications';
 import Messages from './Messages'
 
+
+
+
 const Tab = createBottomTabNavigator();
 
 
-const Dashboard = () => {
+ const Dashboard = () => {
     return (
+        
         <Tab.Navigator
              screenOptions={({route}) => ({
                  tabBarIcon: ({focused, color, size})  => {
@@ -56,3 +60,4 @@ const Dashboard = () => {
 
 
 export default Dashboard;
+
