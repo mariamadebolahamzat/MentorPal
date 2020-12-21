@@ -51,7 +51,7 @@ const Signup = ({navigation}) => {
     
     return (
         <View style={styles.container}>
-            <Image source={require('../assets/MentorPal logo.png')} style={styles.logoImage} />
+            <Image source={require('../assets/MentorPal.logo.png')} style={styles.logoImage} />
             <Formik
             initialValues={{fullname: '', email: '', password: ''}}
             onSubmit={values => handleSignup(values)}
@@ -59,9 +59,9 @@ const Signup = ({navigation}) => {
             >
         {({handleChange, handleBlur, handleSubmit, values, errors}) =>  (
             <View style={{width: "100%"}}>
-            {errorMsg && <Text style={{color: 'red', textAlign: 'center'}}>{errorMsg}</Text>}
+            <Text style={{textAlign: 'center'}}> {errorMsg && <Text style={{color: 'red'}}>{errorMsg}</Text>} </Text>
             <TextInput
-              placeholder="Enter Full Name"
+              placeholder="Enter Fullname"
               autoCapitalize="none"
               style={styles.input}
               onChangeText={handleChange('fullname')}
@@ -81,7 +81,6 @@ const Signup = ({navigation}) => {
             <TextInput
               placeholder="Enter Password"
               secureTextEntry
-              keyboardType="email-address"
               autoCapitalize="none"
               style={styles.input}
               onChangeText={handleChange('password')}

@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 const Landing = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <Image source={require('../assets/MentorPal logo.png')} style={styles.logoImage} /> 
+            <Image source={require('../assets/MentorPal.logo.png')} style={styles.logoImage} /> 
             <Text style={styles.logoText}> MentorPal </Text>
             <View style={styles.textWrapper}>
                 <Text style={styles.text}>Inspiring Aspiring Leaders </Text>
