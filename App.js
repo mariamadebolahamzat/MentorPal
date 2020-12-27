@@ -3,6 +3,7 @@ import {Image, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import Onboarding from './screens/Onboarding';
 import Landing from './screens/Landing';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
@@ -39,6 +40,7 @@ const App = () => {
     <StatusBar backgroundColor="blue" barStyle="default" />
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen options={{headerShown: false}} name="OnboardingScreen" component={OnboardingScreen} />
         <Stack.Screen options={{headerShown: false}} name="Landing" component={Landing} />
         <Stack.Screen 
         options={{
