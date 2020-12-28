@@ -6,12 +6,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Landing from './screens/Landing';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
-import Dashboard from './screens/Dashboard';
 import Menu from './screens/Menu';
 
-import {auth} from './config/firebase';
 
-const Stack = createStackNavigator();
+import {auth} from './config/firebase';
 
 const Logo = () => {
   return (
@@ -22,8 +20,12 @@ const Logo = () => {
   );
 }
 
+
+
+const Stack = createStackNavigator();
 const App = () => {
-  const [fullname, setFullname] = useState('');
+  
+    const [fullname, setFullname] = useState('');
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -38,7 +40,7 @@ const App = () => {
     <>
     <StatusBar backgroundColor="blue" barStyle="default" />
     <NavigationContainer>
-      <Stack.Navigator>
+       <Stack.Navigator>
         <Stack.Screen options={{headerShown: false}} name="Landing" component={Landing} />
         <Stack.Screen 
         options={{
@@ -68,13 +70,14 @@ const App = () => {
          <Stack.Screen options={{headerShown: true,
          headerTitle: props => <Logo {...props}/>
         }} 
-         name="Dashboard" component={Dashboard} 
+         name="Dashboard" component={Menu} 
          />
         </Stack.Navigator>
-        <Menu/>
     </NavigationContainer>
     </>
   )
+
 };
-        export default App;
+        
+export default App;
 
