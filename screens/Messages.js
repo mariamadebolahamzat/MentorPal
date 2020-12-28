@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const Messages = () => {
     return (
         <View style={styles.container}>
-            <Text>Send and receive messages here</Text>
+            <Text>Receive messages here</Text>
         </View>
     )
 };

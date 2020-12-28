@@ -2,19 +2,19 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Ionicons} from '@expo/vector-icons';
 
+
 import Home from './Home';
 import myNetwork from './myNetwork';
 import Notifications from './Notifications';
-import Messages from './Messages'
-
-
+import Messages from './Messages';
 
 
 const Tab = createBottomTabNavigator();
 
+ 
+const Dashboard = () => {
 
- const Dashboard = () => {
-    return (
+return (
         
         <Tab.Navigator
              screenOptions={({route}) => ({
@@ -58,6 +58,6 @@ const Tab = createBottomTabNavigator();
     )
 };
 
-
 export default Dashboard;
+
 
