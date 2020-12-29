@@ -51,7 +51,7 @@ const Menu = () => {
     }}
       >
         <Drawer.Screen name="Home" component={Dashboard}/>
-        <Drawer.Screen name="Profile" component={Profile} />
+        <Drawer.Screen name="Profile" component={Profile}/>
         <Drawer.Screen name="About" component={About} />
         <Drawer.Screen name="Contact Us" component={ContactUs} />
         <Drawer.Screen name="Settings" component={Settings} />

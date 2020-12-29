@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import * as yup from 'yup';
 import {Formik} from 'formik';
-import {auth, firestore} from '../config/firebase';
+import {auth, firestore, authProvider} from '../config/firebase';
+import * as Google from 'expo-google-app-auth';
 
 
 const signupvalidationSchema = yup.object().shape({
@@ -48,6 +49,80 @@ const Signup = ({navigation}) => {
         
     }
 
+    const isUserEqual = (googleUser, firebaseUser) => {
+        if (firebaseUser) {
+          var providerData = firebaseUser.providerData;
+          for (var i = 0; i < providerData.length; i++) {
+            if (providerData[i].providerId === authProvider.PROVIDER_ID &&
+                providerData[i].uid === googleUser.getBasicProfile().getId()) {
+              // We don't need to reauth the Firebase connection.
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+    const onSignIn = (googleUser) => {
+        console.log('Google Auth Response', googleUser);
+        // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+        var unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+          unsubscribe();
+          // Check if we are already signed-in Firebase with the correct user.
+          if (!isUserEqual(googleUser, firebaseUser)) {
+            // Build Firebase credential with the Google ID token.
+            var credential = authProvider.credential(
+                googleUser.idToken,
+                googleUser.accessToken
+                );
+      
+            // Sign in with credential from the Google user.
+            auth.signInWithCredential(credential).then((result) => {
+                console.log('user signed up');
+                console.log(result)
+                const profile = firestore.collection('users').doc(result.user.uid);
+                profile.set({
+                    fullname: result.user.displayName,
+                    email: result.user.email,
+                    image: result.user.photoURL
+
+                })
+
+            }).catch((error) => {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // The email of the user's account used.
+              var email = error.email;
+              // The firebase.auth.AuthCredential type that was used.
+              var credential = error.credential;
+              // ...
+            });
+          } else {
+            console.log('User already signed-in Firebase.');
+          }
+        });
+      }
+
+ const signInWithGoogleAsync = async () => {
+        try {
+          const result = await Google.logInAsync({
+            androidClientId: '874785362525-e6tonhkjuk5am0tshev68ljqpqmh1gse.apps.googleusercontent.com',
+            //iosClientId: YOUR_CLIENT_ID_HERE,
+            scopes: ['profile', 'email'],
+          });
+      
+          if (result.type === 'success') {
+              onSignIn(result);
+              navigation.navigate('Signin')
+            return result.accessToken;
+          } else {
+            return { cancelled: true };
+          }
+        } catch (e) {
+          return { error: true };
+        }
+      }
     
     return (
         <View style={styles.container}>
@@ -96,7 +171,10 @@ const Signup = ({navigation}) => {
                 <TouchableOpacity onPress={handleSubmit} disabled={!values.fullname || !values.email || !values.password} style={!values.fullname || !values.email || !values.password ? styles.DisabledButton : styles.button}>
                   <Text style={styles.buttonText}>Create Account</Text>
                 </TouchableOpacity> 
-            ) }
+            )}
+            <TouchableOpacity onPress={signInWithGoogleAsync} style={styles.button}>
+                  <Text style={styles.buttonText}>Continue with Google</Text>
+                </TouchableOpacity> 
             
             <Text>Already Have An Account? <Text style={styles.login} onPress={() => navigation.navigate('Signin') } >Sign In</Text></Text>
 

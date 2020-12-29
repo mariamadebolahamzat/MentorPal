@@ -4,16 +4,22 @@ import 'firebase/firestore';
 
 
 let firebaseConfig = {
-    apiKey: "AIzaSyCqEEgf4FB4Y1O4yotP0sZIDMy2bM3QvtA",
-    authDomain: "mentorpal-app.firebaseapp.com",
-    projectId: "mentorpal-app",
-    storageBucket: "mentorpal-app.appspot.com",
-    messagingSenderId: "467950197377",
-    appId: "1:467950197377:web:77c9b22a35daed502e0b80"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  apiKey: "AIzaSyAq_KQwNZbtQxG-A0yvUeK4Ly41-7aX4d8",
+  authDomain: "mentorpal-894e6.firebaseapp.com",
+  projectId: "mentorpal-894e6",
+  storageBucket: "mentorpal-894e6.appspot.com",
+  messagingSenderId: "874785362525",
+  appId: "1:874785362525:web:dc1fabd23598d5ce19b3b4"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-  export const auth = firebase.auth();
+export const auth = firebase.auth();
 
-  export const firestore = firebase.firestore();
+export const firestore = firebase.firestore();
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+
+export const authProvider = new firebase.auth.GoogleAuthProvider;
+
+export const persistence = firebase.auth.Auth.Persistence.LOCAL;
