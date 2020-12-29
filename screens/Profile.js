@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {userContext} from '../context/userContext';
 
-const Profile = ({fullname}) => {
+const Profile = () => {
+    const {fullname} = useContext(userContext)
     return (
         <View style={styles.container}>
-            <Text>Your Profile</Text>
+            <Text>Welcome {fullname}</Text>
         </View>
     )
 };

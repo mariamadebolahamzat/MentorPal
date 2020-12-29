@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as yup from 'yup';
 import {Formik} from 'formik';
-import {auth} from '../config/firebase';
+import {auth, authProvider, persistence} from '../config/firebase';
+import * as Google from 'expo-google-app-auth';
 
 
 const signinvalidationSchema = yup.object().shape({
@@ -17,12 +18,34 @@ const Signin = ({navigation}) => {
     const [errorMsg, setErrorMsg] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    const signInWithGoogleAsync = async () => {
+        try {
+          const result = await Google.logInAsync({
+            androidClientId: '874785362525-e6tonhkjuk5am0tshev68ljqpqmh1gse.apps.googleusercontent.com',
+            //iosClientId: YOUR_CLIENT_ID_HERE,
+            scopes: ['profile', 'email'],
+          });
+      
+          if (result.type === 'success') {
+              await auth.setPersistence(persistence);
+              const credential = authProvider.credential(result.idToken, result.accessToken);
+              const googleProfileData = await auth.signInWithCredential(credential);
+              navigation.navigate('Home');
+            return result.accessToken;
+          } else {
+            return { cancelled: true };
+          }
+        } catch (e) {
+          return { error: true };
+        }
+      }
+
 
     const handleLogin = async (values) => {
         try {
             const {email, password} = values;
             const {user} = await auth.signInWithEmailAndPassword(email, password);
-            navigation.navigate('Dashboard');
+            navigation.navigate('Home');
             console.log(user);  
         } catch (error) {
             console.log(error);
@@ -78,8 +101,10 @@ const Signin = ({navigation}) => {
                 <TouchableOpacity onPress={handleSubmit} disabled={!values.email || !values.password} style={!values.email || !values.password ? styles.DisabledButton : styles.button}>
                   <Text style={styles.buttonText}>Log In</Text>
                 </TouchableOpacity> 
-            ) }
-            
+            )}
+            <TouchableOpacity onPress={signInWithGoogleAsync} style={styles.button}>
+                  <Text style={styles.buttonText}>Continue with Google</Text>
+                </TouchableOpacity>
             <Text>Don't Have An Account? <Text style={styles.signup} onPress={() => navigation.navigate('Signup') }>Sign Up</Text></Text>
 
             </View>  
