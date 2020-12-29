@@ -22,18 +22,21 @@ const OnboardingScreen = ({navigation}) => {
   pages={[
     {
       backgroundColor: '#fff',
-      image: <><Image source={require('../assets/img-1.png')} style={{width: '100%', height: '70%'}}/><TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Landing')}><Text style={styles.buttonText}>Get Started</Text></TouchableOpacity></>,
-      title: 'Learn from top professionals', 
+      image: <><Image source={require('../assets/img-1.png')} style={{width: '100%', height: '60%'}}/><TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Landing')}><Text style={styles.buttonText}>Get Started</Text></TouchableOpacity></>,
+      title: 'Relationship',
+      subtitle: 'Learn from top professionals', 
     },
     {
       backgroundColor: '#fff',
     image: <><Image source={require('../assets/img-2.jpg')} /><TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Landing')}><Text style={styles.buttonText}>Get Started</Text></TouchableOpacity></>,
-      title: 'Build a support system',
+    title: 'Community', 
+    subtitle: 'Build a support system',
     },
     {
       backgroundColor: '#fff',
       image: <><Image source={require('../assets/img-3.png')} /><TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Landing')}><Text style={styles.buttonText}>Get Started</Text></TouchableOpacity></>,
-      title: 'Let us help you reach your goal',
+      title: 'Progress',
+      subtitle: 'Let us help you reach your goal',
     },
   ]}
 />
