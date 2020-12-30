@@ -30,7 +30,7 @@ const Signin = ({navigation}) => {
               await auth.setPersistence(persistence);
               const credential = authProvider.credential(result.idToken, result.accessToken);
               const googleProfileData = await auth.signInWithCredential(credential);
-              navigation.navigate('Home');
+              navigation.navigate('Menu');
             return result.accessToken;
           } else {
             return { cancelled: true };
@@ -45,7 +45,7 @@ const Signin = ({navigation}) => {
         try {
             const {email, password} = values;
             const {user} = await auth.signInWithEmailAndPassword(email, password);
-            navigation.navigate('Home');
+            navigation.navigate('Menu');
             console.log(user);  
         } catch (error) {
             console.log(error);

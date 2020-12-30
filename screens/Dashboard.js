@@ -7,6 +7,7 @@ import Home from './Home';
 import myNetwork from './myNetwork';
 import Notifications from './Notifications';
 import Messages from './Messages';
+import CreatePost from './CreatePost';
 
 
 const Tab = createBottomTabNavigator();
@@ -37,6 +38,10 @@ return (
                         iconName = focused
                         ? 'ios-mail'
                         : 'ios-mail'
+                     } else if (route.name === 'Post') {
+                        iconName = focused
+                        ? 'ios-create-outline'
+                        : 'ios-create-outline'
                      }
                      return <Ionicons name={iconName} size={size} color={color} />
                     }
@@ -52,6 +57,7 @@ return (
         >
             <Tab.Screen name="Home" component={Home}/>
             <Tab.Screen name="My Network" component={myNetwork}/>
+            <Tab.Screen name= "Post" component={CreatePost}/>
             <Tab.Screen name="Notifications" component={Notifications}/>
             <Tab.Screen name="Messages" component={Messages}/>
         </Tab.Navigator>
